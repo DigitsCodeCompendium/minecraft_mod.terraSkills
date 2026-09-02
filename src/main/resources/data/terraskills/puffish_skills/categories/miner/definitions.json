@@ -1,0 +1,7 @@
+{
+  "miner_1": { "title": "Miner 1", "frame": { "type": "advancement", "data": { "frame": "task" } }, "icon": { "type": "item", "data": { "item": "wooden_pickaxe" } }, "cost": 1 },
+  "miner_2": { "title": "Miner 2", "frame": { "type": "advancement", "data": { "frame": "task" } }, "icon": { "type": "item", "data": { "item": "stone_pickaxe" } }, "cost": 1 },
+  "miner_3": { "title": "Miner 3", "frame": { "type": "advancement", "data": { "frame": "goal" } }, "icon": { "type": "item", "data": { "item": "iron_pickaxe" } }, "cost": 1 },
+  "miner_4": { "title": "Miner 4", "frame": { "type": "advancement", "data": { "frame": "goal" } }, "icon": { "type": "item", "data": { "item": "golden_pickaxe" } }, "cost": 1 },
+  "miner_5": { "title": "Miner 5", "frame": { "type": "advancement", "data": { "frame": "challenge" } }, "icon": { "type": "item", "data": { "item": "diamond_pickaxe" } }, "cost": 1 }
+}

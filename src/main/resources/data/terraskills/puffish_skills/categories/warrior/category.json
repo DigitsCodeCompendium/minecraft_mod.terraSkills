@@ -1,0 +1,9 @@
+{
+  "unlocked_by_default": true,
+  "title": "Warrior",
+  "icon": {
+    "type": "item",
+    "data": { "item": "iron_sword" }
+  },
+  "background": "textures/gui/advancements/backgrounds/adventure.png"
+}

@@ -1,0 +1,7 @@
+{
+  "miner_1": { "x": 0, "y": 64, "definition": "miner_1", "root": true },
+  "miner_2": { "x": 0, "y": 32, "definition": "miner_2" },
+  "miner_3": { "x": 0, "y": 0, "definition": "miner_3" },
+  "miner_4": { "x": 0, "y": -32, "definition": "miner_4" },
+  "miner_5": { "x": 0, "y": -64, "definition": "miner_5" }
+}

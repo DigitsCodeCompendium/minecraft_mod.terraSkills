@@ -1,0 +1,9 @@
+{
+  "unlocked_by_default": true,
+  "title": "Scholar",
+  "icon": {
+    "type": "item",
+    "data": { "item": "book" }
+  },
+  "background": "textures/gui/advancements/backgrounds/stone.png"
+}

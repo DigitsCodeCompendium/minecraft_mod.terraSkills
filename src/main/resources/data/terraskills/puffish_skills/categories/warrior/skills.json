@@ -1,0 +1,7 @@
+{
+  "warrior_1": { "x": 0, "y": 64, "definition": "warrior_1", "root": true },
+  "warrior_2": { "x": 0, "y": 32, "definition": "warrior_2" },
+  "warrior_3": { "x": 0, "y": 0, "definition": "warrior_3" },
+  "warrior_4": { "x": 0, "y": -32, "definition": "warrior_4" },
+  "warrior_5": { "x": 0, "y": -64, "definition": "warrior_5" }
+}
