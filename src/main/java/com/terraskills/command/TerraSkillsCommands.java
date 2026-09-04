@@ -42,6 +42,11 @@ public final class TerraSkillsCommands {
         root.then(Commands.literal("info").executes(context -> info(context.getSource().getPlayerOrException())));
         root.then(Commands.literal("next").executes(context -> next(context.getSource().getPlayerOrException())));
         root.then(Commands.literal("nutrition").executes(context -> nutrition(context.getSource().getPlayerOrException())));
+        root.then(Commands.literal("messages")
+                .executes(context -> messageStatus(context.getSource().getPlayerOrException()))
+                .then(Commands.literal("status").executes(context -> messageStatus(context.getSource().getPlayerOrException())))
+                .then(Commands.literal("enable").executes(context -> setMessages(context.getSource().getPlayerOrException(), true)))
+                .then(Commands.literal("disable").executes(context -> setMessages(context.getSource().getPlayerOrException(), false))));
         root.then(Commands.literal("tree")
                 .then(Commands.literal("list").executes(context -> list(context.getSource().getPlayerOrException())))
                 .then(Commands.literal("select").then(Commands.argument("tree", StringArgumentType.string())
@@ -89,6 +94,7 @@ public final class TerraSkillsCommands {
         source.sendSuccess(() -> header("COMMAND HELP"), false);
         helpLine(source, "/ts info", "Show your active tree, RPG stats, rate, and saved progress.");
         helpLine(source, "/ts nutrition", "Explain your nutrition contributions and balance modifier.");
+        helpLine(source, "/ts messages enable|disable", "Control nutrition updates shown after eating.");
         helpLine(source, "/ts next", "Show when and where your next skill point will arrive.");
         helpLine(source, "/ts tree list", "List every tree, its points, rate, progress, and next point.");
         helpLine(source, "/ts tree select <tree>", "Pause the old tree and begin training another.");
@@ -116,6 +122,19 @@ public final class TerraSkillsCommands {
         source.sendSuccess(() -> field("Runtime paused", yesNo(ProgressionRuntime.isPaused()),
                 ProgressionRuntime.isPaused() ? ChatFormatting.RED : ChatFormatting.GREEN), false);
         source.sendSuccess(TerraSkillsCommands::footer, false);
+        return 1;
+    }
+
+    private static int messageStatus(ServerPlayer player) {
+        boolean enabled = PlayerProgress.nutritionMessagesEnabled(player);
+        player.sendSystemMessage(field("Nutrition messages", enabled ? "ENABLED" : "DISABLED",
+                enabled ? ChatFormatting.GREEN : ChatFormatting.RED));
+        return 1;
+    }
+
+    private static int setMessages(ServerPlayer player, boolean enabled) {
+        PlayerProgress.setNutritionMessagesEnabled(player, enabled);
+        player.sendSystemMessage(success("Nutrition messages " + (enabled ? "enabled." : "disabled.")));
         return 1;
     }
 

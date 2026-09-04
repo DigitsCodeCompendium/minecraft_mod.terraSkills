@@ -14,6 +14,7 @@ public final class PlayerProgress {
     private static final String ACCUMULATED_POINTS = "accumulatedPointsByTree";
     private static final String LAST_REAL_TIME = "lastRealTimeMillis";
     private static final String STATS = "stats";
+    private static final String NUTRITION_MESSAGES = "nutritionMessages";
 
     private PlayerProgress() {}
 
@@ -60,6 +61,15 @@ public final class PlayerProgress {
 
     public static void setLastRealTimeMillis(ServerPlayer player, long time) {
         data(player).putLong(LAST_REAL_TIME, time);
+    }
+
+    public static boolean nutritionMessagesEnabled(ServerPlayer player) {
+        CompoundTag root = data(player);
+        return !root.contains(NUTRITION_MESSAGES) || root.getBoolean(NUTRITION_MESSAGES);
+    }
+
+    public static void setNutritionMessagesEnabled(ServerPlayer player, boolean enabled) {
+        data(player).putBoolean(NUTRITION_MESSAGES, enabled);
     }
 
     public static void copy(ServerPlayer oldPlayer, ServerPlayer newPlayer) {
