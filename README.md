@@ -41,7 +41,7 @@ Point generation uses wall-clock time and follows this formula:
  * balance multiplier) * RPG stat multiplier
 ```
 
-Balance is based on `least-full nutrient / most-full nutrient`. Its configurable
+Balance is based on the average pairwise closeness of all nutrients. Its configurable
 minimum and exponent control how strongly an unbalanced diet is penalized. RPG
 stats are `might`, `finesse`, `endurance`, `intelligence`, and `instinct`. Every
 configured tree names a primary and secondary stat with separate configurable
@@ -57,8 +57,32 @@ Useful commands:
 /terraskills stat set <players> <stat> <value>  # permission level 2
 ```
 
-Origins or another integration can grant stats through `RpgStatsApi` without
-knowing how TerraSkills stores player data.
+Java integrations can grant permanent base stats through `RpgStatsApi`. TerraSkills
+also registers synchronized player attributes for temporary bonuses and origin powers:
+
+```text
+terraskills:might
+terraskills:finesse
+terraskills:endurance
+terraskills:intelligence
+terraskills:instinct
+```
+
+Neo Origins can grant these with its normal attribute modifier power. For example:
+
+```json
+{
+  "type": "neoorigins:attribute_modifier",
+  "attribute": "terraskills:might",
+  "amount": 3.0,
+  "operation": "add_value",
+  "name": "Powerful Build",
+  "description": "+3 Might"
+}
+```
+
+The modifier belongs to the power, so Neo Origins removes the bonus automatically
+when the power or origin is removed. TerraSkills does not require Neo Origins to load.
 
 `generation.realMinutesPerSkillDay` controls the real-time duration of a skill
 day (default `1440`, or 24 hours). `generation.enabled` is the startup master

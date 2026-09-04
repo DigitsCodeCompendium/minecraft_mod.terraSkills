@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import com.terraskills.config.TerraSkillsConfig;
 import com.terraskills.config.TerraSkillsClientConfig;
 import com.terraskills.network.TerraSkillsNetwork;
+import com.terraskills.progression.TerraSkillsAttributes;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -16,6 +17,7 @@ public final class TerraSkills {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public TerraSkills(IEventBus modBus, ModContainer container) {
+        TerraSkillsAttributes.register(modBus);
         container.registerConfig(ModConfig.Type.SERVER, TerraSkillsConfig.SPEC);
         container.registerConfig(ModConfig.Type.CLIENT, TerraSkillsClientConfig.SPEC);
         modBus.addListener(TerraSkillsNetwork::registerPayloads);

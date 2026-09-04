@@ -68,5 +68,11 @@
   "terraskills.hud.paused": "Paused",
   "terraskills.hud.no_progress": "No progress",
   "terraskills.hud.no_tree": "No tree selected",
-  "terraskills.hud.select_tree": "Use /ts tree select"
+  "terraskills.hud.select_tree": "Use /ts tree select",
+
+  "attribute.name.terraskills.might": "Might",
+  "attribute.name.terraskills.finesse": "Finesse",
+  "attribute.name.terraskills.endurance": "Endurance",
+  "attribute.name.terraskills.intelligence": "Intelligence",
+  "attribute.name.terraskills.instinct": "Instinct"
 }

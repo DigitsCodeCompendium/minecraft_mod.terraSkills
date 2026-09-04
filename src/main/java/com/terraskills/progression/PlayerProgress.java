@@ -34,7 +34,9 @@ public final class PlayerProgress {
     }
 
     public static int getStat(ServerPlayer player, RpgStat stat) {
-        return data(player).getCompound(STATS).getInt(stat.id());
+        int baseValue = data(player).getCompound(STATS).getInt(stat.id());
+        double attributeBonus = player.getAttributeValue(TerraSkillsAttributes.get(stat));
+        return Math.clamp(baseValue + (int) Math.round(attributeBonus), 0, TerraSkillsConfig.MAX_STAT_VALUE.get());
     }
 
     public static void setStat(ServerPlayer player, RpgStat stat, int value) {
