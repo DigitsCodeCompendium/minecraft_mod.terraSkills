@@ -102,3 +102,25 @@ resuming.
 progress, current rate, and estimated time to its next point. Inactive trees
 retain their progress indefinitely. `/ts next` gives the same countdown for the
 currently active tree.
+
+## Releases and Packwiz
+
+Every push and pull request is built by GitHub Actions. Push a version tag to
+also create a GitHub Release containing the versioned mod JAR and `SHA256SUMS`:
+
+```powershell
+git tag v0.2.0
+git push origin v0.2.0
+```
+
+The resulting Packwiz-compatible download URL is stable and version-specific:
+
+```text
+https://github.com/DigitsCodeCompendium/minecraft_mod.terraSkills/releases/download/v0.2.0/terraskills-0.2.0.jar
+```
+
+In the Packwiz repository, add that URL with the URL provider:
+
+```powershell
+packwiz url add terraskills https://github.com/DigitsCodeCompendium/minecraft_mod.terraSkills/releases/download/v0.2.0/terraskills-0.2.0.jar
+```
