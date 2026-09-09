@@ -27,6 +27,10 @@ sourceSets.main.resources {
 }
 
 repositories {
+    maven {
+        name = 'TerraLibLocal'
+        url = uri(providers.gradleProperty('terralib_repo').orElse('../minecraft_mod.terraLib/repo').get())
+    }
     maven { url = uri('https://maven.puffish.net') }
     maven { url = uri('https://api.modrinth.com/maven') }
     maven { url = uri('https://maven.blamejared.com') }
@@ -106,6 +110,7 @@ dependencies {
     // And its provides the option to then use net.minecraft as the group, and one of; client, server or joined as the module name, plus the game version as version.
     // For all intends and purposes: You can treat this dependency as if it is a normal library you would use.
     implementation "net.neoforged:neoforge:${neo_version}"
+    implementation "com.digitscodecompendium.terralib:terralib:${terralib_version}"
 
     // TerraSkills is an integration mod, so both mods are required at compile and runtime.
     implementation "maven.modrinth:terrafirmacraft:${tfc_version}"
@@ -152,6 +157,7 @@ tasks.withType(ProcessResources).configureEach {
             mod_version            : mod_version,
             tfc_version            : tfc_version,
             puffish_skills_version : puffish_skills_version,
+            terralib_version       : terralib_version,
     ]
     inputs.properties replaceProperties
 
@@ -176,6 +182,15 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+// IntelliJ's generated NeoGradle application launchers invoke this before starting
+// BootstrapLauncher. NeoGradle 7.1 does not create the aggregate task itself.
+tasks.register('ideBeforeRun') {
+    group = 'ide'
+    description = 'Generates every legacy classpath file used by IntelliJ run configurations.'
+    dependsOn 'writeMinecraftClasspathClient', 'writeMinecraftClasspathData',
+            'writeMinecraftClasspathGameTestServer', 'writeMinecraftClasspathServer'
 }
 
 // IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.

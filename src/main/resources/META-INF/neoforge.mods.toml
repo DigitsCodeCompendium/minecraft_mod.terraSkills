@@ -87,6 +87,13 @@ Bridges TerraFirmaCraft's nutrition system with Pufferfish's Skills.
     side="BOTH"
 
 [[dependencies.${mod_id}]]
+    modId="terralib"
+    type="required"
+    versionRange="[${terralib_version},)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
     modId="tfc"
     type="required"
     versionRange="[${tfc_version},)"

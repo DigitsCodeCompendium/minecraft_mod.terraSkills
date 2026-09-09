@@ -8,6 +8,7 @@ system and Pufferfish's Skills.
 - Java 21
 - Minecraft 1.21.1
 - NeoForge 21.1.248
+- TerraLib 0.1.0
 - TerraFirmaCraft 4.2.9
 - Pufferfish's Skills 0.18.3
 
@@ -15,12 +16,20 @@ Import the Gradle project in IntelliJ IDEA, then use the generated `client` or
 `server` run configuration. From a terminal:
 
 ```powershell
+Push-Location ..\minecraft_mod.terraLib
+.\gradlew.bat publish
+Pop-Location
 .\gradlew.bat build
 .\gradlew.bat runClient
 ```
 
-The build downloads TFC, Pufferfish's Skills, and the required Patchouli runtime
-dependency from their Maven repositories.
+TerraSkills resolves TerraLib from the sibling project's local Maven repository
+by default. Override it with `-Pterralib_repo=<path>` when the projects use a
+different directory layout.
+
+The build resolves TerraLib from its local Maven repository and downloads TFC,
+Pufferfish's Skills, and the required Patchouli runtime dependency from their
+configured Maven repositories.
 
 ## Integration entry point
 
@@ -119,8 +128,15 @@ The resulting Packwiz-compatible download URL is stable and version-specific:
 https://github.com/DigitsCodeCompendium/minecraft_mod.terraSkills/releases/download/v0.2.0/terraskills-0.2.0.jar
 ```
 
-In the Packwiz repository, add that URL with the URL provider:
+In the Packwiz repository, add the GitHub project with Packwiz's GitHub provider.
+The regex selects the mod JAR instead of the checksum asset:
 
 ```powershell
-packwiz url add terraskills https://github.com/DigitsCodeCompendium/minecraft_mod.terraSkills/releases/download/v0.2.0/terraskills-0.2.0.jar
+packwiz github add DigitsCodeCompendium/minecraft_mod.terraSkills --regex '^terraskills-[0-9].*\.jar$'
+```
+
+Once a newer tagged release exists, update it normally through Packwiz:
+
+```powershell
+packwiz update terraskills
 ```

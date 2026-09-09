@@ -17,6 +17,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Checkout TerraLib
+        uses: actions/checkout@v4
+        with:
+          repository: DigitsCodeCompendium/minecraft_mod.terraLib
+          path: terralib
+
       - name: Set up Java 21
         uses: actions/setup-java@v4
         with:
@@ -29,10 +35,11 @@ jobs:
       - name: Build and verify
         shell: bash
         run: |
+          (cd terralib && ./gradlew publish)
           if [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
-            ./gradlew clean build -Prelease_version="${GITHUB_REF_NAME#v}"
+            ./gradlew clean build -Pterralib_repo=terralib/repo -Prelease_version="${GITHUB_REF_NAME#v}"
           else
-            ./gradlew clean build
+            ./gradlew clean build -Pterralib_repo=terralib/repo
           fi
 
       - name: Collect release files
