@@ -59,7 +59,7 @@ Bridges TerraFirmaCraft's nutrition system with Pufferfish's Skills.
 #file="META-INF/accesstransformer.cfg"
 
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.${mod_id}]] #optional
+[[dependencies.terraskills]] #optional
     # the modid of the dependency
     modId="neoforge" #mandatory
     # The type of the dependency. Can be one of "required", "optional", "incompatible" or "discouraged" (case insensitive).
@@ -78,7 +78,7 @@ Bridges TerraFirmaCraft's nutrition system with Pufferfish's Skills.
     side="BOTH"
 
 # Here's another dependency
-[[dependencies.${mod_id}]]
+[[dependencies.terraskills]]
     modId="minecraft"
     type="required"
     # This version range declares a minimum of the current minecraft version up to but not including the next major version
@@ -86,21 +86,21 @@ Bridges TerraFirmaCraft's nutrition system with Pufferfish's Skills.
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.${mod_id}]]
+[[dependencies.terraskills]]
     modId="terralib"
     type="required"
     versionRange="[${terralib_version},)"
     ordering="AFTER"
     side="BOTH"
 
-[[dependencies.${mod_id}]]
+[[dependencies.terraskills]]
     modId="tfc"
     type="required"
     versionRange="[${tfc_version},)"
     ordering="AFTER"
     side="BOTH"
 
-[[dependencies.${mod_id}]]
+[[dependencies.terraskills]]
     modId="puffish_skills"
     type="required"
     versionRange="[0.18.3,)"
