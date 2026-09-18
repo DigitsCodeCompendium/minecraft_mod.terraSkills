@@ -27,9 +27,30 @@ sourceSets.main.resources {
 }
 
 repositories {
-    maven {
-        name = 'TerraLibLocal'
-        url = uri(providers.gradleProperty('terralib_repo').orElse('../minecraft_mod.terraLib/repo').get())
+    if (providers.gradleProperty('terralib_repo').isPresent()) {
+        maven {
+            name = 'TerraLibLocal'
+            url = uri(providers.gradleProperty('terralib_repo').get())
+            content {
+                includeModule('com.digitscodecompendium.terralib', 'terralib')
+            }
+        }
+    } else {
+        // TerraLib is distributed as a versioned GitHub Release JAR rather than
+        // through a Maven repository, so resolve it with an artifact-only layout.
+        ivy {
+            name = 'TerraLibGitHubReleases'
+            url = uri('https://github.com/DigitsCodeCompendium/minecraft_mod.terraLib/releases/download')
+            patternLayout {
+                artifact 'v[revision]/[artifact]-[revision].[ext]'
+            }
+            metadataSources {
+                artifact()
+            }
+            content {
+                includeModule('com.digitscodecompendium.terralib', 'terralib')
+            }
+        }
     }
     maven { url = uri('https://maven.puffish.net') }
     maven { url = uri('https://api.modrinth.com/maven') }

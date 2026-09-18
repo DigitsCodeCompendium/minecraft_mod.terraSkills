@@ -16,20 +16,16 @@ Import the Gradle project in IntelliJ IDEA, then use the generated `client` or
 `server` run configuration. From a terminal:
 
 ```powershell
-Push-Location ..\minecraft_mod.terraLib
-.\gradlew.bat publish
-Pop-Location
 .\gradlew.bat build
 .\gradlew.bat runClient
 ```
 
-TerraSkills resolves TerraLib from the sibling project's local Maven repository
-by default. Override it with `-Pterralib_repo=<path>` when the projects use a
-different directory layout.
+TerraSkills downloads the versioned TerraLib JAR from its GitHub Release by
+default. For local TerraLib development, publish its Maven artifact locally and
+override the repository with `-Pterralib_repo=<path-to-terralib-repo>`.
 
-The build resolves TerraLib from its local Maven repository and downloads TFC,
-Pufferfish's Skills, and the required Patchouli runtime dependency from their
-configured Maven repositories.
+The build also downloads TFC, Pufferfish's Skills, and the required Patchouli
+runtime dependency from their configured Maven repositories.
 
 ## Integration entry point
 
