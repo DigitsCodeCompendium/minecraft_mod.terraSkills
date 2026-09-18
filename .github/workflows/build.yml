@@ -38,8 +38,8 @@ jobs:
         run: |
           terralib_version="$(sed -n 's/^terralib_version=//p' gradle.properties)"
           test -n "${terralib_version}"
-          (cd terralib && ./gradlew publish -Pmod_version="${terralib_version}")
-          test -d terralib/repo
+          (cd terralib && env -u GITHUB_REF_TYPE -u GITHUB_REF_NAME ./gradlew publish -Pmod_version="${terralib_version}")
+          test -f "terralib/repo/com/digitscodecompendium/terralib/terralib/${terralib_version}/terralib-${terralib_version}.pom"
           if [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
             ./gradlew clean build -Pterralib_repo=terralib/repo -Prelease_version="${GITHUB_REF_NAME#v}"
           else
