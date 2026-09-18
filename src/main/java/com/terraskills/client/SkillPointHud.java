@@ -19,7 +19,7 @@ public final class SkillPointHud {
     public static void accept(SkillProgressPayload payload) { state = payload; }
 
     public static void render(GuiGraphics graphics, DeltaTracker deltaTracker) {
-        if (!TerraSkillsClientConfig.SHOW_HUD.get()) return;
+        if (!TerraSkillsClientConfig.SKILL_POINT_HUD.enabled()) return;
         boolean hasTree = !state.tree().isEmpty();
         String treeName = hasTree ? TerraFormats.humanizeIdentifier(state.tree()) : Component.translatable("terraskills.hud.no_tree").getString();
         double progress = Math.clamp(state.progress(), 0, 1);
@@ -30,9 +30,7 @@ public final class SkillPointHud {
                         state.nutritionBeforeBalance(), state.maximumNutrition(),
                         new double[]{state.grain(), state.fruit(), state.vegetables(), state.protein(), state.dairy()},
                         NUTRIENT_COLORS),
-                new ProgressChartHud.Placement(TerraSkillsClientConfig.HUD_SCALE.get(),
-                        TerraSkillsClientConfig.HORIZONTAL_POSITION.get(), TerraSkillsClientConfig.VERTICAL_POSITION.get(),
-                        TerraSkillsClientConfig.HUD_ANCHOR.get()));
+                TerraSkillsClientConfig.SKILL_POINT_HUD);
     }
 
     private static String remainingTime(double progress) {
